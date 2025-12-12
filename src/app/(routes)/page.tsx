@@ -1,7 +1,13 @@
-export default function Home() {
+import { cookies } from "next/headers";
+import { MainPage } from "./MainPage";
+
+export default async function Home() {
+
+
+  const isLoggedIn = (await cookies()).get("auth") ? true : false;
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <>
+      <MainPage isLoggedIn={isLoggedIn} />
+    </>
   );
 }
