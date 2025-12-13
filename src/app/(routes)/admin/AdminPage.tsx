@@ -1,5 +1,3 @@
-
-
 import { SlotItemWithUser } from "@/models";
 
 import styles from "./AdminPage.module.scss";

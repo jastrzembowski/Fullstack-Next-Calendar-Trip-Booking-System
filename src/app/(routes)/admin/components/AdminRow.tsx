@@ -1,6 +1,7 @@
 "use client";
 
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button, Modal, Toast } from "@/components";
@@ -8,7 +9,6 @@ import { SlotItemWithUser } from "@/models";
 import { adminDeleteSlot } from "@/utils";
 
 import styles from "./AdminRow.module.scss";
-import { useRouter } from "next/navigation";
 
 export const AdminRow = ({ date }: { date: SlotItemWithUser }) => {
   const [isOpen, setIsOpen] = useState(false);

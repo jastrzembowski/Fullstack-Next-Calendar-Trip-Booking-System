@@ -5,11 +5,7 @@ import { SlotItemWithUser } from "@/models";
 import { AdminRow } from "./AdminRow";
 import styles from "./AdminTable.module.scss";
 
-export const AdminTable = ({
-  dates,
-}: {
-  dates: SlotItemWithUser[];
-}) => {
+export const AdminTable = ({ dates }: { dates: SlotItemWithUser[] }) => {
   if (!dates || dates.length === 0) {
     return <div>Brak terminów</div>;
   }
