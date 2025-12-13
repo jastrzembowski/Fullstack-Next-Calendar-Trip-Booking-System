@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const user = await UserService.findByEmail(email);
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid credentials" },
+        { error: "Nieprawidłowe dane logowania" },
         { status: 401 }
       );
     }
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     const valid = await verifyPassword(password, user.passwordHash);
     if (!valid) {
       return NextResponse.json(
-        { error: "Invalid credentials" },
+        { error: "Nieprawidłowe dane logowania" },
         { status: 401 }
       );
     }
@@ -39,12 +39,15 @@ export async function POST(req: Request) {
     const res = NextResponse.json({
       success: true,
       user: { id: user.id, email: user.email },
+      token,
     });
+    
     res.cookies.set("auth", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7,
+      path: "/",
     });
 
     return res;

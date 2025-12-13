@@ -7,13 +7,11 @@ export const DateService = {
   create: (data: {
     date: Date;
     title?: string;
-    notes?: string;
     userId?: number;
   }) => db.date.create({ data }),
   update: (id: string, data: {
     date?: Date;
     title?: string;
-    notes?: string;
   }) => db.date.update({ where: { id }, data }),
   delete: (id: string) => db.date.delete({ where: { id } }),
 };

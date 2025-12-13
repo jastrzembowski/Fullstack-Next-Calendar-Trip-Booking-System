@@ -17,11 +17,11 @@ export const Navbar =  ( { isLoggedIn, handleLogout }: NavbarProps ) => {
       <Logo />
       <div className={styles.links}>
         {isLoggedIn ? (
-          <Button onClick={() => handleLogout()}>Logout</Button>
+          <Button onClick={() => handleLogout()}>Wyloguj</Button>
         ) : (
           <>
-            <Button href={PATHS.LOGIN}>Login</Button>
-            <Button href={PATHS.REGISTER}>Register</Button>
+            <Button href={PATHS.LOGIN}>Logowanie</Button>
+            <Button href={PATHS.REGISTER}>Rejestracja</Button>
           </>
         )}
       </div>

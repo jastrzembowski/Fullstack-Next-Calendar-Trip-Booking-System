@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 12px;
+}
+
+.infoTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-900);
+  text-align: center;
+  margin: 0;
+}
+
+.infoText {
+    margin: 0;
+  font-size: 16px;
+  color: var(--primary-900);
+  text-align: center;
+}
+
+.infoBox {
+ padding: 48px 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 24px;
+}

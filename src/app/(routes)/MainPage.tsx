@@ -1,13 +1,15 @@
 import { FormContainer, Header } from "@/components";
+import styles from "./MainPage.module.scss";
+import { getCurrentUser } from "@/server/auth";
 
-interface MainPageProps {
-  isLoggedIn: boolean;
-}
-export const MainPage = ( { isLoggedIn }: MainPageProps ) => {
+  
+export const MainPage = async () => {
+  const user = await getCurrentUser();
+  
   return (
-    <div>
+    <div className={styles.container}>
       <Header>
-        <FormContainer isLoggedIn={isLoggedIn} />
+        <FormContainer user={user} />
       </Header>
     </div>
   );

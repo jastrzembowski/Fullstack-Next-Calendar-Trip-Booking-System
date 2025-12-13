@@ -1,9 +1,7 @@
-import { LoginBox } from "@/components";
+import { LoginPage } from "./LoginPage";
 
 export default function Login() {
   return (
-    <div>
-      <LoginBox  error={""} isLoading={false} type="login" />
-    </div>
+  <LoginPage />
   );
 }

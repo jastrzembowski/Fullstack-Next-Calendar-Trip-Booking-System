@@ -1,10 +1,15 @@
 import Link from "next/link";
 import LogoImg from "@/assets/logo.svg";
 import styles from "./Logo.module.scss";
+import clsx from "clsx";
 
-export const Logo = () => {
+interface LogoProps {
+  className?: string;
+}
+
+export const Logo = ({ className }: LogoProps) => {
   return (
-    <Link href="/" className={styles.logoLink}>
+    <Link href="/" className={clsx(styles.logoLink, className)}>
       <LogoImg className={styles.logo} />
 
       Getaboat.pl

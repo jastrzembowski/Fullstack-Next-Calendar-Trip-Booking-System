@@ -9,6 +9,18 @@ export const UserService = {
     return db.user.findUnique({ where: { email } });
   },
 
+  findById: (id: number) => {
+    return db.user.findUnique({ 
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+      }
+    });
+  },
+
   createWithPassword: async (data: { email: string; password: string }) => {
     const passwordHash = await hashPassword(data.password);
     return db.user.create({

@@ -1,8 +1,8 @@
-import { Footer, Navbar } from "@/components";
+import { Footer, Navbar, UserProvider } from "@/components";
 import { Lato } from "next/font/google";
 import "./globals.scss";
-import { cookies } from "next/headers";
 import { handleLogout } from "./actions";
+import { getCurrentUser } from "@/server/auth";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -15,14 +15,17 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isLoggedIn = (await cookies()).get("auth") ? true : false;
+  const user = await getCurrentUser();
+  const isLoggedIn = !!user;
 
   return (
     <html>
       <body className={lato.className}>
-        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        {children}
-        <Footer />
+        <UserProvider user={user}>
+          <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+          {children}
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );

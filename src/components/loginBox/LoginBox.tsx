@@ -1,19 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components";
-
+import { Button, Logo } from "@/components";
+import { handleLogin, handleRegister } from "@/app/actions";
+import styles from "./LoginBox.module.scss";
+import { Input } from "../input/Input";
+import { PATHS } from "@/utils";
+import { redirect } from "next/navigation";
 interface LoginBoxProps {
   error: string;
   isLoading: boolean;
   type: "login" | "register";
 }
 
-export const LoginBox = ({
-  error,
-  isLoading,
-  type,
-}: LoginBoxProps) => {
+const title = {
+  login: "Zaloguj się do swojego konta",
+  register: "Zarejestruj się aby korzystać z naszych usług",
+};
+
+export const LoginBox = ({ error, isLoading, type }: LoginBoxProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -30,25 +35,14 @@ export const LoginBox = ({
 
     try {
       if (type === "login") {
-        const response = await fetch("/api/auth", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          console.log(data);
-        } else {
+        const data = await handleLogin(email, password);
+        if (!data.success) {
           setLocalError(data.error || "Login failed");
         }
       } else if (type === "register") {
-        const response = await fetch("/api/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-        if (response.ok) {
+        const data = await handleRegister(email, password);
+
+        if (data.success) {
           console.log(data);
         } else {
           setLocalError(data.error || "Registration failed");
@@ -61,29 +55,28 @@ export const LoginBox = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit} className={styles.container}>
+      <Logo className={styles.logo} />
+      <h1 className={styles.title}>{title[type]}</h1>
+      <Input
         type="email"
         placeholder="Email"
         value={email}
-        autoComplete="email"
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      <input
+      <Input
         type="password"
         placeholder="Password"
         value={password}
-        autoComplete={type === "login" ? "current-password" : "new-password"}
         onChange={(e) => setPassword(e.target.value)}
         required
       />
       {type === "register" && (
-        <input
+        <Input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
-          autoComplete="new-password"
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
@@ -91,8 +84,8 @@ export const LoginBox = ({
       {(error || localError) && (
         <div style={{ color: "red" }}>{localError || error}</div>
       )}
-      <Button type="submit" disabled={isLoading}>
-        {type === "login" ? "Login" : "Register"}
+      <Button type="submit" disabled={isLoading} className={styles.button}>
+        {type === "login" ? "Logowanie" : "Rejestracja"}
       </Button>
     </form>
   );

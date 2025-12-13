@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     const existingUser = await UserService.findByEmail(email);
     if (existingUser) {
       return NextResponse.json(
-        { error: "User with this email already exists" },
+        { error: "Użytkownik o podanym emailu już istnieje" },
         { status: 409 }
       );
     }
@@ -30,14 +30,15 @@ export async function POST(req: Request) {
     const token = signToken({ id: user.id });
 
     const res = NextResponse.json(
-      { success: true, user: { id: user.id, email: user.email } },
+      { success: true, user: { id: user.id, email: user.email }, token },
       { status: 201 }
     );
     res.cookies.set("auth", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, 
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
     });
 
     return res;
