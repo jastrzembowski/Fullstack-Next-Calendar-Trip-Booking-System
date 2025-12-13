@@ -1,13 +1,8 @@
 "use client";
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, ReactNode, useContext } from "react";
 
-export interface User {
-  id: number;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { User } from "@/models";
 
 interface UserContextType {
   user: User | null;
@@ -27,9 +22,6 @@ interface UserProviderProps {
 
 export const UserProvider = ({ children, user }: UserProviderProps) => {
   return (
-    <UserContext.Provider value={{ user }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   );
 };
-

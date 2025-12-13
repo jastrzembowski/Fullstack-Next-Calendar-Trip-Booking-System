@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { db } from "@/server/db";
+
 import { userSchema } from "@/lib/validators/user.schema";
+import { db } from "@/server/db";
 
 export async function GET() {
   const users = await db.user.findMany();

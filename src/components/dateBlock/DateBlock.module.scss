@@ -13,7 +13,7 @@
 
 .content {
   display: inline-block;
-  transition: 
+  transition:
     transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -26,7 +26,11 @@
 .hiddenText {
   position: absolute;
   top: 50%;
-  background: linear-gradient(to bottom, var(--primary-100), var(--primary-400));
+  background: linear-gradient(
+    to bottom,
+    var(--primary-100),
+    var(--primary-400)
+  );
   width: 100%;
   font-weight: 900;
   height: 100%;
@@ -44,7 +48,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-
 }
 
 .container:hover .hiddenText {
@@ -55,10 +58,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-    text-align: center;
-    color: var(--primary-900);
+  text-align: center;
+  color: var(--primary-900);
 }
 
-.details p{
-font-size: 18px;
+.details p {
+  font-size: 18px;
 }

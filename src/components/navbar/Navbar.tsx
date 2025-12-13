@@ -1,23 +1,26 @@
 "use client";
 
+import { Button, Logo, Toast } from "@/components";
 import { PATHS } from "@/utils";
-import styles from "./Navbar.module.scss";
-import { Logo, Button } from "@/components";
 
+import styles from "./Navbar.module.scss";
 
 interface NavbarProps {
   isLoggedIn: boolean;
   handleLogout: () => void;
 }
-export const Navbar =  ( { isLoggedIn, handleLogout }: NavbarProps ) => {
-
+export const Navbar = ({ isLoggedIn, handleLogout }: NavbarProps) => {
+  const logout = () => {
+    handleLogout();
+    Toast("Pomyślnie wylogowano", "success");
+  };
 
   return (
     <nav className={styles.navbar}>
       <Logo />
       <div className={styles.links}>
         {isLoggedIn ? (
-          <Button onClick={() => handleLogout()}>Wyloguj</Button>
+          <Button onClick={logout}>Wyloguj</Button>
         ) : (
           <>
             <Button href={PATHS.LOGIN}>Logowanie</Button>

@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+
 import { verifyToken } from "./services/token.service";
 import { UserService } from "./services/user.service";
 
@@ -13,7 +14,7 @@ export async function getCurrentUser() {
     }
 
     const decoded = verifyToken(token) as { id: number };
-    
+
     if (!decoded || !decoded.id) {
       console.log("Invalid token payload:", decoded);
       return null;
@@ -32,4 +33,3 @@ export async function getCurrentUser() {
     return null;
   }
 }
-

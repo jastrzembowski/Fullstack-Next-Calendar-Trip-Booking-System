@@ -7,6 +7,7 @@
   flex-direction: column;
   height: auto;
   left: 50%;
+  min-height: 650px;
   max-width: 1024px;
   padding: 24px 48px;
   position: absolute;
@@ -14,14 +15,12 @@
   transform: translate(-50%, 0);
   width: 100%;
   z-index: 2;
-  
 }
 
 .calendarContainer {
   display: flex;
   flex-direction: row;
   gap: 48px;
-
 }
 
 .title {
@@ -31,6 +30,6 @@
   color: var(--primary-100);
   width: 100%;
   padding-bottom: 24px;
-  border-bottom:1px solid var(--primary-100);
+  border-bottom: 1px solid var(--primary-100);
   margin-bottom: 24px;
 }

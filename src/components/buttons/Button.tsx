@@ -1,6 +1,7 @@
-import Link from "next/link";
-import styles from "./Button.module.scss";
 import clsx from "clsx";
+import Link from "next/link";
+
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
   children: React.ReactNode;

@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/server/auth";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+
+import { getCurrentUser } from "@/server/auth";
 
 export async function GET() {
   try {
-    // Debug: Check if cookie exists
     const cookieStore = await cookies();
     const authCookie = cookieStore.get("auth");
-    
+
     if (!authCookie) {
       console.log("No auth cookie found in API route");
       return NextResponse.json(
@@ -30,9 +30,11 @@ export async function GET() {
   } catch (error) {
     console.error("Get user error:", error);
     return NextResponse.json(
-      { error: "Internal server error", details: error instanceof Error ? error.message : String(error) },
+      {
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : String(error),
+      },
       { status: 500 }
     );
   }
 }
-

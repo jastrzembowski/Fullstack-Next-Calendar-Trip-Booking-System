@@ -1,4 +1,5 @@
 import { LoginBox } from "@/components";
+
 import styles from "./LoginPage.module.scss";
 
 export const LoginPage = () => {
@@ -7,4 +8,4 @@ export const LoginPage = () => {
       <LoginBox error={""} isLoading={false} type="login" />
     </div>
   );
-}
+};

@@ -1,8 +1,11 @@
-import { Footer, Navbar, UserProvider } from "@/components";
 import { Lato } from "next/font/google";
+
+import { Footer, Navbar, UserProvider } from "@/components";
+
 import "./globals.scss";
-import { handleLogout } from "./actions";
+
 import { getCurrentUser } from "@/server/auth";
+import { handleLogout } from "@/utils";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],

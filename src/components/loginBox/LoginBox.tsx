@@ -1,12 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button, Logo } from "@/components";
-import { handleLogin, handleRegister } from "@/app/actions";
-import styles from "./LoginBox.module.scss";
-import { Input } from "../input/Input";
+
+import { Button, Logo, Toast } from "@/components";
 import { PATHS } from "@/utils";
-import { redirect } from "next/navigation";
+import { handleLogin, handleRegister } from "@/utils/userActions";
+
+import { Input } from "../input/Input";
+import styles from "./LoginBox.module.scss";
+
 interface LoginBoxProps {
   error: string;
   isLoading: boolean;
@@ -19,7 +22,10 @@ const title = {
 };
 
 export const LoginBox = ({ error, isLoading, type }: LoginBoxProps) => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState<string | null>(null);
@@ -36,20 +42,36 @@ export const LoginBox = ({ error, isLoading, type }: LoginBoxProps) => {
     try {
       if (type === "login") {
         const data = await handleLogin(email, password);
-        if (!data.success) {
-          setLocalError(data.error || "Login failed");
+        if (data.success) {
+          Toast("Pomyślnie zalogowano", "success");
+          setTimeout(() => {
+            router.push(PATHS.HOME);
+          }, 100);
+        } else {
+          setLocalError(data.error || "Nieprawidłowe dane logowania");
+          Toast(data.error || "Nieprawidłowe dane logowania", "error");
         }
       } else if (type === "register") {
-        const data = await handleRegister(email, password);
+        const data = await handleRegister(
+          email,
+          password,
+          name,
+          surname,
+          "user"
+        );
 
         if (data.success) {
-          console.log(data);
+          Toast("Rejestracja zakończona sukcesem", "success");
+          setTimeout(() => {
+            router.push(PATHS.HOME);
+          }, 100);
         } else {
-          setLocalError(data.error || "Registration failed");
+          setLocalError(data.error || "Nieprawidłowe dane rejestracji");
+          Toast(data.error || "Nie udało się zarejestrować", "error");
         }
       }
     } catch (err) {
-      setLocalError("Something went wrong. Please try again.");
+      setLocalError("Coś poszło nie tak. Spróbuj ponownie.");
       console.error(err);
     }
   };
@@ -58,6 +80,25 @@ export const LoginBox = ({ error, isLoading, type }: LoginBoxProps) => {
     <form onSubmit={handleSubmit} className={styles.container}>
       <Logo className={styles.logo} />
       <h1 className={styles.title}>{title[type]}</h1>
+      {type === "register" && (
+        <>
+          <Input
+            type="name"
+            placeholder="Name"
+            value={name || ""}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <Input
+            type="surname"
+            placeholder="Surname"
+            value={surname || ""}
+            onChange={(e) => setSurname(e.target.value)}
+            required
+          />
+        </>
+      )}
+
       <Input
         type="email"
         placeholder="Email"

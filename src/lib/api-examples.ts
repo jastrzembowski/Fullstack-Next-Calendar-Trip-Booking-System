@@ -1,6 +1,6 @@
 /**
  * Example usage of the DateService API endpoints from the frontend
- * 
+ *
  * This file demonstrates how to call the date endpoints using the api client.
  * You can use these patterns in your React components.
  */
@@ -87,20 +87,20 @@ export async function deleteDate(id: string) {
 
 /**
  * Example React component usage:
- * 
+ *
  * "use client";
- * 
+ *
  * import { useState, useEffect } from "react";
  * import { getAllDates, createDate, updateDate, deleteDate } from "@/lib/api-examples";
- * 
+ *
  * export function DatesComponent() {
  *   const [dates, setDates] = useState([]);
  *   const [loading, setLoading] = useState(true);
- * 
+ *
  *   useEffect(() => {
  *     loadDates();
  *   }, []);
- * 
+ *
  *   const loadDates = async () => {
  *     try {
  *       setLoading(true);
@@ -112,7 +112,7 @@ export async function deleteDate(id: string) {
  *       setLoading(false);
  *     }
  *   };
- * 
+ *
  *   const handleCreate = async () => {
  *     try {
  *       const newDate = await createDate({
@@ -125,7 +125,7 @@ export async function deleteDate(id: string) {
  *       console.error("Error creating date:", error);
  *     }
  *   };
- * 
+ *
  *   const handleUpdate = async (id: string) => {
  *     try {
  *       const updated = await updateDate(id, {
@@ -136,7 +136,7 @@ export async function deleteDate(id: string) {
  *       console.error("Error updating date:", error);
  *     }
  *   };
- * 
+ *
  *   const handleDelete = async (id: string) => {
  *     try {
  *       await deleteDate(id);
@@ -145,9 +145,9 @@ export async function deleteDate(id: string) {
  *       console.error("Error deleting date:", error);
  *     }
  *   };
- * 
+ *
  *   if (loading) return <div>Loading...</div>;
- * 
+ *
  *   return (
  *     <div>
  *       <button onClick={handleCreate}>Create Date</button>
@@ -162,4 +162,3 @@ export async function deleteDate(id: string) {
  *   );
  * }
  */
-

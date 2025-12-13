@@ -1,21 +1,19 @@
 "use client";
 
+import { pl } from "date-fns/locale";
 import { Dispatch, SetStateAction } from "react";
 import { DayPicker } from "react-day-picker";
-import { pl } from "date-fns/locale";
+
 import "react-day-picker/style.css";
 
 interface CalendarProps {
-  selectedDate?: Date ;
+  selectedDate?: Date;
   setSelectedDate: Dispatch<SetStateAction<Date | undefined>>;
 }
 export const Calendar = ({ selectedDate, setSelectedDate }: CalendarProps) => {
-
-
   const matcher = [
     { dayOfWeek: [0, 7] },
-    { from: new Date(1900, 0, 1), to: new Date() }
-
+    { from: new Date(1900, 0, 1), to: new Date() },
   ];
 
   return (
@@ -25,7 +23,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }: CalendarProps) => {
       selected={selectedDate}
       onSelect={setSelectedDate}
       locale={pl}
-      disabled={ matcher }
+      disabled={matcher}
     />
   );
 };

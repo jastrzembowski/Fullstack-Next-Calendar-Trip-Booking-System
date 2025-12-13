@@ -1,4 +1,5 @@
 import { LoginBox } from "@/components";
+
 import styles from "./RegisterPage.module.scss";
 
 export const RegisterPage = () => {

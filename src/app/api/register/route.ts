@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
+
 import { registerSchema } from "@/lib/validators/user.schema";
-import { UserService } from "@/server/services/user.service";
 import { signToken } from "@/server/services/token.service";
+import { UserService } from "@/server/services/user.service";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
+
     const parsed = registerSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { email, password } = parsed.data;
+    const { email, password, name, surname, role } = parsed.data;
 
     const existingUser = await UserService.findByEmail(email);
     if (existingUser) {
@@ -25,7 +26,13 @@ export async function POST(req: Request) {
       );
     }
 
-    const user = await UserService.createWithPassword({ email, password });
+    const user = await UserService.createWithPassword({
+      email,
+      password,
+      name,
+      surname,
+      role,
+    });
 
     const token = signToken({ id: user.id });
 
@@ -50,4 +57,3 @@ export async function POST(req: Request) {
     );
   }
 }
-

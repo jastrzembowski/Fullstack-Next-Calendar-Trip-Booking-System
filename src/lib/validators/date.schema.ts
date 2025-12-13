@@ -9,6 +9,4 @@ export const dateSchema = z.object({
   ]),
   title: z.string().optional(),
   notes: z.string().optional(),
-  userId: z.number().int().optional(),
 });
-

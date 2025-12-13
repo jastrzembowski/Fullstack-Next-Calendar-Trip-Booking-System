@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
 import { PATHS } from "@/utils";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
@@ -10,7 +11,6 @@ export async function handleLogout() {
   (await cookies()).delete("auth");
   redirect(PATHS.HOME);
 }
-
 
 export async function handleLogin(email: string, password: string) {
   const response = await fetch(`${BASE_URL}/api/auth`, {
@@ -28,17 +28,23 @@ export async function handleLogin(email: string, password: string) {
       maxAge: 60 * 60 * 24 * 7,
       path: "/",
     });
-    redirect(PATHS.HOME);
+    return { success: true };
   } else {
     return { success: false, error: data.error };
   }
 }
 
-export async function handleRegister(email: string, password: string) {
+export async function handleRegister(
+  email: string,
+  password: string,
+  name: string,
+  surname: string,
+  role: string
+) {
   const response = await fetch(`${BASE_URL}/api/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, name, surname, role }),
   });
   const data = await response.json();
   if (data.success && data.token) {

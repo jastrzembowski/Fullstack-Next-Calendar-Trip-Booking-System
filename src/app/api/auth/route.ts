@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { verifyPassword } from "@/server/utils/hash";
-import { UserService } from "@/server/services/user.service";
-import { signToken } from "@/server/services/token.service";
+
 import { loginSchema } from "@/lib/validators/user.schema";
+import { signToken } from "@/server/services/token.service";
+import { UserService } from "@/server/services/user.service";
+import { verifyPassword } from "@/server/utils/hash";
 
 export async function POST(req: Request) {
   try {
@@ -41,7 +42,7 @@ export async function POST(req: Request) {
       user: { id: user.id, email: user.email },
       token,
     });
-    
+
     res.cookies.set("auth", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
