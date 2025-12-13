@@ -1,5 +1,13 @@
-import { MainPage } from "./MainPage";
+import { FormContainer, Header } from "@/components";
 
-export default async function Home() {
-  return <MainPage />;
+import styles from "./MainPage.module.scss";
+
+export default async function MainPage() {
+  return (
+    <div className={styles.container}>
+      <Header>
+        <FormContainer />
+      </Header>
+    </div>
+  );
 }

@@ -19,13 +19,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
-  const isLoggedIn = !!user;
 
   return (
     <html>
       <body className={lato.className}>
         <UserProvider user={user}>
-          <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+          <Navbar user={user} handleLogout={handleLogout} />
           {children}
           <Footer />
         </UserProvider>

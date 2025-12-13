@@ -1,12 +1,8 @@
-import { UserToDB } from "@/models";
 import { hashPassword } from "@/server/utils/hash";
 
 import { db } from "../db";
 
 export const UserService = {
-  findAll: () => db.user.findMany(),
-  create: (data: UserToDB) => db.user.create({ data }),
-
   findByEmail: (email: string) => {
     return db.user.findUnique({ where: { email } });
   },

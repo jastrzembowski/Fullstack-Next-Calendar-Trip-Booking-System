@@ -3,4 +3,5 @@ export const PATHS = {
   REGISTER: "/register",
   DASHBOARD: "/dashboard",
   HOME: "/",
+  ADMIN: "/admin",
 };

@@ -14,3 +14,4 @@ export * from "./modal";
 export * from "./navbar";
 export * from "./toast";
 export * from "./userContext";
+export * from "./page404";

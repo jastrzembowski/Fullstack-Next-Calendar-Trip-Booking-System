@@ -1,0 +1,26 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--primary-900);
+  text-align: center;
+}
+
+.thead {
+  background-color: var(--primary-900);
+  color: var(--primary-100);
+}
+
+.tbody {
+  background-color: var(--primary-100);
+  color: var(--primary-900);
+}
+
+.th {
+  padding: 8px;
+  border: 1px solid var(--primary-100);
+}
+
+.td {
+  border: 1px solid var(--primary-900);
+  padding: 8px;
+}

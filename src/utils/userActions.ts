@@ -28,7 +28,7 @@ export async function handleLogin(email: string, password: string) {
       maxAge: 60 * 60 * 24 * 7,
       path: "/",
     });
-    return { success: true };
+    return { success: true, user: data.user };
   } else {
     return { success: false, error: data.error };
   }
@@ -60,17 +60,3 @@ export async function handleRegister(
   return data;
 }
 
-export async function handleFetchUser() {
-  try {
-    const response = await fetch(`${BASE_URL}/api/user`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return { user: null };
-  }
-}

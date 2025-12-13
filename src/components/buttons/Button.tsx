@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -8,7 +10,7 @@ interface ButtonProps {
   className?: string;
   disabled?: boolean;
   href?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary";
   alert?: boolean;
@@ -48,6 +50,7 @@ export const Button = ({
       )}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

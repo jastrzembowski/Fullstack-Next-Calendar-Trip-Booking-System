@@ -1,22 +1,16 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { dateSchema } from "@/lib/validators/date.schema";
 import { getCurrentUser } from "@/server/auth";
 import { DateService } from "@/server/services/date.service";
-import { verifyToken } from "@/server/services/token.service";
 
 export async function GET(req: Request) {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("auth")?.value;
-    const decoded = verifyToken(token!) as { id: number };
-    const userId = decoded.id;
-
-    if (!userId) {
+    const user = await getCurrentUser();
+    if (!user) {
       return NextResponse.json(
         { error: "Unauthorized. Please log in to view dates." },
-        { status: 400 }
+        { status: 401 }
       );
     }
 
@@ -25,7 +19,6 @@ export async function GET(req: Request) {
 
     let dates;
     if (dateParam) {
-      // Validate date format (should be YYYY-MM-DD)
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
       if (!dateRegex.test(dateParam)) {
         return NextResponse.json(
@@ -33,10 +26,8 @@ export async function GET(req: Request) {
           { status: 400 }
         );
       }
-      // Find all dates for the specified date (ignoring time)
       dates = await DateService.findByDate(dateParam);
     } else {
-      // If no date parameter, return all dates
       dates = await DateService.findAll();
     }
 
@@ -148,7 +139,6 @@ export async function PUT(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    // Authenticate user
     const user = await getCurrentUser();
     if (!user) {
       return NextResponse.json(
@@ -167,7 +157,6 @@ export async function DELETE(req: Request) {
       );
     }
 
-    // Verify the date belongs to the current user
     const existingDate = await DateService.findById(id);
     if (!existingDate) {
       return NextResponse.json({ error: "Date not found" }, { status: 404 });

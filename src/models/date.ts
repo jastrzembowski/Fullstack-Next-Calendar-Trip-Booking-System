@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface SlotItem {
   id: string;
   date: Date;
@@ -5,4 +7,8 @@ export interface SlotItem {
   userId: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface SlotItemWithUser extends SlotItem {
+  user?: User;
 }

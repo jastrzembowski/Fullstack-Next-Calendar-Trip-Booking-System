@@ -43,10 +43,14 @@ export const LoginBox = ({ error, isLoading, type }: LoginBoxProps) => {
       if (type === "login") {
         const data = await handleLogin(email, password);
         if (data.success) {
-          Toast("Pomyślnie zalogowano", "success");
           setTimeout(() => {
-            router.push(PATHS.HOME);
+            if (data.user.email === "admin@admin.pl") {
+              router.push(PATHS.ADMIN);
+            } else {
+              router.push(PATHS.HOME);
+            }
           }, 100);
+          Toast("Pomyślnie zalogowano", "success");
         } else {
           setLocalError(data.error || "Nieprawidłowe dane logowania");
           Toast(data.error || "Nieprawidłowe dane logowania", "error");
