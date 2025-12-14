@@ -5,7 +5,7 @@ import styles from "./LoginPage.module.scss";
 export const LoginPage = () => {
   return (
     <div className={styles.container}>
-      <LoginBox error={""} isLoading={false} type="login" />
+      <LoginBox  type="login" />
     </div>
   );
 };
