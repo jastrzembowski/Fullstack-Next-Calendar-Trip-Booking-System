@@ -122,13 +122,23 @@ export const LoginBox = ({ type }: LoginBoxProps) => {
       if (type === "login") {
         const data = await handleLogin(email, password);
         if (data.success) {
-          setTimeout(() => {
-            if (data.user.email === "admin@admin.pl") {
-              router.push(PATHS.ADMIN);
-            } else {
+          const userResponse = await fetch("/api/user");
+          if (userResponse.ok) {
+            const userData = await userResponse.json();
+            const user = userData.user;
+
+            setTimeout(() => {
+              if (user?.role === "admin") {
+                router.push(PATHS.ADMIN);
+              } else {
+                router.push(PATHS.HOME);
+              }
+            }, 100);
+          } else {
+            setTimeout(() => {
               router.push(PATHS.HOME);
-            }
-          }, 100);
+            }, 100);
+          }
           Toast("Pomyślnie zalogowano", "success");
         } else {
           setLocalError(data.error || "Nieprawidłowe dane logowania");
