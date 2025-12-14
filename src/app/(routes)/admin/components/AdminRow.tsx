@@ -31,8 +31,10 @@ export const AdminRow = ({ date }: { date: SlotItemWithUser }) => {
     <>
       <tr className={styles.tr}>
         <td className={styles.td}>{date.id}</td>
-        <td className={styles.td}>{dayjs(date.date).format("YYYY-MM-DD")}</td>
-        <td className={styles.td}>{dayjs(date.date).format("HH:mm")}</td>
+        <td className={styles.td}>
+          {dayjs.utc(date.date).format("YYYY-MM-DD")}
+        </td>
+        <td className={styles.td}>{dayjs.utc(date.date).format("HH:mm")}</td>
         <td className={styles.td}>
           {date.user?.name} {date.user?.surname}
         </td>

@@ -11,6 +11,16 @@
     color: var(--primary-100);
     cursor: pointer;
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      background-color: var(--primary-100);
+      color: var(--primary-900);
+      cursor: default;
+    }
+  }
 }
 
 .secondary {

@@ -5,16 +5,18 @@ A modern, full-stack calendar booking application built with Next.js for managin
 ## 🚀 Features
 
 ### User Features
+
 - **User Authentication**: Secure registration and login system with JWT tokens
 - **Calendar Interface**: Interactive calendar for selecting available dates
 - **Time Slot Booking**: Book available time slots (9:00 AM - 5:00 PM, 2-hour intervals)
-- **Profile Management**: 
+- **Profile Management**:
   - View and edit personal information (name, surname, email)
   - View all personal reservations
   - Delete own reservations
 - **Responsive Design**: Modern UI with SCSS styling
 
 ### Admin Features
+
 - **Admin Dashboard**: View all bookings across all users
 - **User Management**: Access to user information and booking history
 - **Role-based Access Control**: Admin-only routes and functionality
@@ -22,6 +24,7 @@ A modern, full-stack calendar booking application built with Next.js for managin
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Next.js 16** - React framework with App Router
 - **React 19** - UI library
 - **TypeScript** - Type safety
@@ -32,6 +35,7 @@ A modern, full-stack calendar booking application built with Next.js for managin
 - **Zod** - Schema validation
 
 ### Backend
+
 - **Next.js API Routes** - Server-side API endpoints
 - **Prisma** - ORM for database management
 - **PostgreSQL** - Database
@@ -83,6 +87,7 @@ next-calendar/
 ## 🚦 Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ and npm/yarn
 - PostgreSQL database
 - Environment variables configured
@@ -90,12 +95,14 @@ next-calendar/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd next-calendar
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -104,6 +111,7 @@ next-calendar/
 
 3. **Set up environment variables**
    Create a `.env` file in the root directory:
+
    ```env
    DATABASE_URL="postgresql://user:password@localhost:5432/next_calendar"
    JWT_SECRET="your-secret-jwt-key-here"
@@ -111,15 +119,17 @@ next-calendar/
    ```
 
 4. **Set up the database**
+
    ```bash
    # Generate Prisma Client
    npx prisma generate
-   
+
    # Run migrations
    npx prisma migrate dev
    ```
 
 5. **Start the development server**
+
    ```bash
    npm run dev
    # or
@@ -141,6 +151,7 @@ next-calendar/
 ## 🔐 Authentication
 
 The application uses JWT (JSON Web Tokens) for authentication:
+
 - Tokens are stored in HTTP-only cookies
 - Tokens expire after 7 days
 - Protected routes require valid authentication
@@ -149,15 +160,19 @@ The application uses JWT (JSON Web Tokens) for authentication:
 ## 🎨 Key Features Explained
 
 ### Time Slot Generation
+
 Time slots are generated from 9:00 AM to 5:00 PM with 2-hour intervals:
+
 - 09:00, 11:00, 13:00, 15:00, 17:00
 
 ### Calendar Restrictions
+
 - Weekends (Saturday and Sunday) are disabled
 - Past dates are disabled
 - Only future weekdays can be selected
 
 ### Booking Flow
+
 1. User selects a date from the calendar
 2. Available time slots for that date are displayed
 3. User clicks on a time slot to book
@@ -176,12 +191,14 @@ Time slots are generated from 9:00 AM to 5:00 PM with 2-hour intervals:
 ## 🧪 Development
 
 ### Code Style
+
 - TypeScript for type safety
 - ESLint for code linting
 - Prettier for code formatting
 - SCSS modules for component styling
 
 ### Database Management
+
 ```bash
 # Create a new migration
 npx prisma migrate dev --name migration_name
@@ -196,14 +213,16 @@ npx prisma migrate reset
 ## 🚢 Deployment
 
 ### Build for Production
+
 ```bash
 npm run build
 npm run start
 ```
 
 ### Environment Variables for Production
+
 Ensure all environment variables are set in your production environment:
+
 - `DATABASE_URL` - Production database connection string
 - `JWT_SECRET` - Strong, random secret key
 - `NODE_ENV` - Set to "production"
-

@@ -3,9 +3,11 @@
 import dayjs from "dayjs";
 import { Fragment, useState } from "react";
 
-import { Button, Modal, Toast, useUser } from "@/components";
+import { Toast, useUser } from "@/components";
 import { handleCreateDate } from "@/utils";
 
+import { AdminModal } from "./components/AdminModal";
+import { UserModal } from "./components/UserModal";
 import styles from "./DateBlock.module.scss";
 
 interface DateBlockProps {
@@ -19,6 +21,8 @@ export const DateBlock = ({ date, time, fetchDates }: DateBlockProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
+
+  const isAdmin = user?.role === "admin";
 
   const handleRegister = async () => {
     const data = await handleCreateDate(
@@ -44,33 +48,23 @@ export const DateBlock = ({ date, time, fetchDates }: DateBlockProps) => {
         </span>
         <span className={styles.hiddenText}>Zarezerwuj</span>
       </button>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <div className={styles.modalContent}>
-          <h1>Czy na pewno chcesz zarezerwować ten termin?</h1>
-          <div className={styles.details}>
-            <p>Imię: {user?.name}</p>
-            <p>Nazwisko: {user?.surname}</p>
-            <p>email: {user?.email}</p>
-            <p>Data: {date.toLocaleDateString()}</p>
-            <p>Godzina: {time}</p>
-          </div>
-          <Button
-            variant="secondary"
-            className={styles.confirmButton}
-            onClick={handleRegister}
-          >
-            Zarezerwuj
-          </Button>
-          <Button
-            variant="secondary"
-            alert
-            className={styles.cancelButton}
-            onClick={handleClose}
-          >
-            Anuluj
-          </Button>
-        </div>
-      </Modal>
+      {isAdmin ? (
+        <AdminModal
+          isOpen={isOpen}
+          handleClose={handleClose}
+          handleRegister={handleRegister}
+          date={date}
+          time={time}
+        />
+      ) : (
+        <UserModal
+          isOpen={isOpen}
+          handleClose={handleClose}
+          handleRegister={handleRegister}
+          date={date}
+          time={time}
+        />
+      )}
     </Fragment>
   );
 };

@@ -16,6 +16,8 @@ export const Navbar = ({ user, handleLogout }: NavbarProps) => {
     Toast("Pomyślnie wylogowano", "success");
   };
 
+  const isAdmin = user?.role === "admin";
+
   return (
     <nav className={styles.navbar}>
       <Logo />
@@ -25,8 +27,15 @@ export const Navbar = ({ user, handleLogout }: NavbarProps) => {
             <p className={styles.welcome}>
               Witaj, {user.name} {user.surname}!
             </p>
-            <Button href={PATHS.HOME}>Strona główna</Button>
-            <Button href={PATHS.PROFILE}>Profil</Button>
+            {isAdmin ? (
+              <Button href={PATHS.ADMIN}>Panel administracyjny</Button>
+            ) : (
+              <>
+                <Button href={PATHS.HOME}>Strona główna</Button>
+                <Button href={PATHS.PROFILE}>Profil</Button>
+              </>
+            )}
+
             <Button onClick={logout} className={styles.logoutButton}>
               Wyloguj
             </Button>

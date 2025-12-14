@@ -31,8 +31,8 @@ export const EditableSlot = ({ slot }: { slot: SlotItemWithUser }) => {
   return (
     <>
       <tr>
-        <td>{dayjs(slot.date).format("YYYY-MM-DD")}</td>
-        <td>{dayjs(slot.date).format("HH:mm")}</td>
+        <td>{dayjs.utc(slot.date).format("YYYY-MM-DD")}</td>
+        <td>{dayjs.utc(slot.date).format("HH:mm")}</td>
         <td>
           <Button onClick={handleOpen}>Usuń</Button>
         </td>
