@@ -21,12 +21,16 @@ export const Navbar = ({ user, handleLogout }: NavbarProps) => {
       <Logo />
       <div className={styles.links}>
         {user ? (
-          <>
+          <div className={styles.userLinks}>
             <p className={styles.welcome}>
               Witaj, {user.name} {user.surname}!
             </p>
-            <Button onClick={logout}>Wyloguj</Button>
-          </>
+            <Button href={PATHS.HOME}>Strona główna</Button>
+            <Button href={PATHS.PROFILE}>Profil</Button>
+            <Button onClick={logout} className={styles.logoutButton}>
+              Wyloguj
+            </Button>
+          </div>
         ) : (
           <>
             <Button href={PATHS.LOGIN}>Logowanie</Button>

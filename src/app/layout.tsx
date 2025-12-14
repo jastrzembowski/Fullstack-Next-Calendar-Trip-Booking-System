@@ -1,6 +1,6 @@
 import { Lato } from "next/font/google";
 
-import { Footer, Navbar, UserProvider } from "@/components";
+import { Footer, Navbar, ToastContainer, UserProvider } from "@/components";
 
 import "./globals.scss";
 
@@ -27,6 +27,7 @@ export default async function RootLayout({
           <Navbar user={user} handleLogout={handleLogout} />
           {children}
           <Footer />
+          <ToastContainer />
         </UserProvider>
       </body>
     </html>

@@ -9,6 +9,7 @@ export const DateService = {
   findAll: () => db.date.findMany(),
   findAllWithUser: () => db.date.findMany({ include: { user: true } }),
   findById: (id: string) => db.date.findUnique({ where: { id } }),
+  findByUserId: (userId: number) => db.date.findMany({ where: { userId } }),
   findByDate: (date: string) => {
     const startOfDay = dayjs.utc(date).startOf("day").toDate();
     const endOfDay = dayjs.utc(date).endOf("day").toDate();

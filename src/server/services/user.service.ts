@@ -38,4 +38,10 @@ export const UserService = {
       },
     });
   },
+  update: (
+    id: number,
+    data: { email?: string; name?: string; surname?: string }
+  ) => {
+    return db.user.update({ where: { id }, data });
+  },
 };

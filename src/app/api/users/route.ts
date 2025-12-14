@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { userSchema } from "@/lib/validators/user.schema";
+import { UserToDB } from "@/models";
 import { db } from "@/server/db";
 
 export async function GET() {
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
   }
 
   const user = await db.user.create({
-    data: parsed.data,
+    data: parsed.data as UserToDB,
   });
 
   return NextResponse.json(user, { status: 201 });

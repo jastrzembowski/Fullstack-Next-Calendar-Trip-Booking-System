@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  min-height: calc(100vh - 134px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--primary-900);
+  border-radius: 12px;
+  overflow: hidden;
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid var(--primary-900);
+  }
+  th {
+    background-color: var(--primary-900);
+    color: var(--primary-100);
+  }
+  td {
+    color: var(--primary-900);
+  }
+}

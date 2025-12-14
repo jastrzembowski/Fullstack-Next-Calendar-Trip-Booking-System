@@ -1,0 +1,10 @@
+.modalContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  text-align: center;
+  color: var(--primary-900);
+  height: 500px;
+}

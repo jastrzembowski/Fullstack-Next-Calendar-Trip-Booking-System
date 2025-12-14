@@ -16,17 +16,33 @@ export async function handleCreateDate(date: string) {
   }
 }
 
-export async function handleFetchSlots(date?: Date) {
-  if (!date) {
-    return { success: false, error: "Date is required" };
+export async function handleFetchSlots(
+  date?: Date | null,
+  userId?: number | null
+) {
+  let url = `${BASE_URL}/api/dates`;
+  if (date) {
+    url += `?date=${dayjs(date).format("YYYY-MM-DD")}`;
+  } else if (userId) {
+    url += `?userId=${userId}`;
   }
-  const response = await fetch(
-    `${BASE_URL}/api/dates?date=${dayjs(date).format("YYYY-MM-DD")}`
-  );
+  const response = await fetch(url);
   const data = await response.json();
 
   if (data.success) {
     return { success: true, dates: data.dates };
+  } else {
+    return { success: false, error: data.error };
+  }
+}
+
+export async function handleDeleteDate(id: string) {
+  const response = await fetch(`${BASE_URL}/api/dates?id=${id}`, {
+    method: "DELETE",
+  });
+  const data = await response.json();
+  if (data.success) {
+    return { success: true };
   } else {
     return { success: false, error: data.error };
   }

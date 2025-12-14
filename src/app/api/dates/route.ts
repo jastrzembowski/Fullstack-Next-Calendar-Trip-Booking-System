@@ -16,8 +16,10 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url);
     const dateParam = searchParams.get("date");
+    const userIdParam = searchParams.get("userId");
 
     let dates;
+
     if (dateParam) {
       const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
       if (!dateRegex.test(dateParam)) {
@@ -27,6 +29,12 @@ export async function GET(req: Request) {
         );
       }
       dates = await DateService.findByDate(dateParam);
+    } else if (userIdParam) {
+      const userId = parseInt(userIdParam);
+      if (isNaN(userId)) {
+        return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
+      }
+      dates = await DateService.findByUserId(userId);
     } else {
       dates = await DateService.findAll();
     }
